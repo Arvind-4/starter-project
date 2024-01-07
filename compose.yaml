@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  web:
+    container_name: web
+    build: 
+      context: .
+      dockerfile: ./apps/docker/web/Dockerfile
+    env_file:
+      - ./.env
+    ports:
+      - 8000:8000
+    networks:
+      - webnet
+    depends_on:
+      - db
+
+  db:
+    container_name: postgres-db
+    image: postgres:14.0-alpine
+    env_file:
+      - ./.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+    networks:
+      - webnet
+
+  nginx:
+    build: 
+      context: .
+      dockerfile: ./apps/docker/nginx/Dockerfile
+    ports:
+      - 80:80
+    depends_on:
+      - web
+      - www
+    networks:
+      - webnet
+  
+  www:
+    container_name: www
+    build: 
+      context: .
+      dockerfile: ./apps/docker/www/Dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      - webnet
+
+volumes:
+  postgres_data:
+
+networks:
+  webnet:
