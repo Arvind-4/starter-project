@@ -1,19 +1,15 @@
-import type { Metadata } from 'next'
-import Script from 'next/script'
+import type { Metadata } from "next";
+import Script from "next/script";
 
-import '@src/app/globals.css'
-import Navbar from '@src/components/ui/navbar'
+import "@src/app/globals.css";
+import Navbar from "@src/components/ui/navbar";
 
 export const metadata: Metadata = {
-  title: 'Sample Starter Project',
-  description: 'A starter project with django, nextjs, and postgres',
-}
+  title: "Sample Starter Project",
+  description: "A starter project with django, nextjs, and postgres",
+};
 
-export default function Layout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
@@ -25,5 +21,5 @@ export default function Layout({
         ></Script>
       </body>
     </html>
-  )
+  );
 }
