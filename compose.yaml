@@ -28,6 +28,7 @@ services:
       - webnet
 
   nginx:
+    container_name: nginx
     build: 
       context: .
       dockerfile: ./apps/docker/nginx/Dockerfile
